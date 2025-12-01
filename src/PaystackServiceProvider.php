@@ -15,7 +15,7 @@ class PaystackServiceProvider extends ServiceProvider
     {
         if ($this->app->runningInConsole()) {
             $this->publishes([
-                __DIR__.'/../config/paystack.php' => config_path('paystack.php'),
+                __DIR__.'/../Config/paystack.php' => config_path('paystack.php'),
             ], 'paystack-config');
 
             $this->publishes([
@@ -24,7 +24,7 @@ class PaystackServiceProvider extends ServiceProvider
         }
 
         $this->mergeConfigFrom(
-            __DIR__.'/../config/paystack.php', 'paystack'
+            __DIR__.'/../Config/paystack.php', 'paystack'
         );
     }
 
@@ -34,7 +34,7 @@ class PaystackServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->app->singleton('paystack.client', function ($app) {
-            return new Client($app['config']['paystack']);
+            return new Client($app['Config']['paystack']);
         });
 
         $this->app->singleton('paystack', function ($app) {
