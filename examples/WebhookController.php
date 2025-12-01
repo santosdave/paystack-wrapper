@@ -32,20 +32,42 @@ class WebhookController extends Controller
                 'data' => $data,
             ]);
 
-            // Route to appropriate handler
-            match ($eventType) {
-                'charge.success' => $this->handleChargeSuccess($data),
-                'charge.dispute.create' => $this->handleDisputeCreated($data),
-                'charge.dispute.resolve' => $this->handleDisputeResolved($data),
-                'transfer.success' => $this->handleTransferSuccess($data),
-                'transfer.failed' => $this->handleTransferFailed($data),
-                'transfer.reversed' => $this->handleTransferReversed($data),
-                'subscription.create' => $this->handleSubscriptionCreated($data),
-                'subscription.disable' => $this->handleSubscriptionDisabled($data),
-                'refund.processed' => $this->handleRefundProcessed($data),
-                'customeridentification.success' => $this->handleCustomerIdentificationSuccess($data),
-                default => $this->handleUnknownEvent($eventType, $data),
-            };
+
+            switch ($eventType) {
+                case 'charge.success':
+                    $this->handleChargeSuccess($data);
+                    break;
+                case 'charge.dispute.create':
+                    $this->handleDisputeCreated($data);
+                    break;
+                case 'charge.dispute.resolve':
+                    $this->handleDisputeResolved($data);
+                    break;
+                case 'transfer.success':
+                    $this->handleTransferSuccess($data);
+                    break;
+                case 'transfer.failed':
+                    $this->handleTransferFailed($data);
+                    break;
+                case 'transfer.reversed':
+                    $this->handleTransferReversed($data);
+                    break;
+                case 'subscription.create':
+                    $this->handleSubscriptionCreated($data);
+                    break;
+                case 'subscription.disable':
+                    $this->handleSubscriptionDisabled($data);
+                    break;
+                case 'refund.processed':
+                    $this->handleRefundProcessed($data);
+                    break;
+                case 'customeridentification.success':
+                    $this->handleCustomerIdentificationSuccess($data);
+                    break;
+                default:
+                    $this->handleUnknownEvent($eventType, $data);
+                    break;
+            }
 
             return response()->json(['status' => 'success'], 200);
         } catch (PaystackException $e) {
