@@ -15,16 +15,17 @@ class PaystackServiceProvider extends ServiceProvider
     {
         if ($this->app->runningInConsole()) {
             $this->publishes([
-                __DIR__.'/../Config/paystack.php' => config_path('paystack.php'),
+                __DIR__ . '/../Config/paystack.php' => config_path('paystack.php'),
             ], 'paystack-config');
 
             $this->publishes([
-                __DIR__.'/../database/migrations' => database_path('migrations'),
+                __DIR__ . '/../database/migrations' => database_path('migrations'),
             ], 'paystack-migrations');
         }
 
         $this->mergeConfigFrom(
-            __DIR__.'/../Config/paystack.php', 'paystack'
+            __DIR__ . '/Config/paystack.php',
+            'paystack'
         );
     }
 
@@ -34,7 +35,7 @@ class PaystackServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->app->singleton('paystack.client', function ($app) {
-            return new Client($app['Config']['paystack']);
+            return new Client($app['config']['paystack']);
         });
 
         $this->app->singleton('paystack', function ($app) {
