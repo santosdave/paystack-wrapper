@@ -49,7 +49,7 @@ A comprehensive, secure, and production-ready Laravel wrapper for the Paystack p
 Install via Composer:
 
 ```bash
-composer require santosdave/laravel-paystack
+composer require santosdave/paystack-wrapper
 ```
 
 Publish the configuration file:

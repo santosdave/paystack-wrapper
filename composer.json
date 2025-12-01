@@ -1,5 +1,5 @@
 {
-  "name": "santosdave/laravel-paystack",
+  "name": "santosdave/paystack-wrapper",
   "version": "1.0.0",
   "description": "A comprehensive and secure Laravel wrapper for Paystack payment gateway",
   "keywords": [
